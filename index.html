@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dolly Parton Fan Club</title>
+<style>
+:root {
+  --brown1: #8B4513;
+  --brown2: #A1887F;
+  --cream: #FFF8F0;
+  --text: #5D4037;
+}
+body {
+  background: linear-gradient(135deg, var(--brown1) 0%, #CD853F 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+.container {
+  display: flex;
+  max-width: 1000px;
+  width: 100%;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+}
+.left-panel {
+  flex: 1;
+  background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+    url('https://upload.wikimedia.org/wikipedia/commons/a/a3/Young-Dolly-Parton.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.left-panel h1 {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  font-family: 'Brush Script MT', cursive;
+}
+.left-panel p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+.right-panel {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--cream);
+}
+.step {
+  display: none;
+}
+.step.active {
+  display: block;
+}
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text);
+  font-weight: 600;
+}
+input, select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #D7CCC8;
+  border-radius: 10px;
+  font-size: 16px;
+  background: white;
+  margin-bottom: 15px;
+}
+.btn {
+  background: linear-gradient(to right, var(--brown1), var(--brown2));
+  color: white;
+  border: none;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 48%;
+}
+.btn.secondary {
+  background: #ddd;
+  color: #333;
+}
+.btn-row {
+  display: flex;
+  justify-content: space-between;
+}
+.thankyou {
+  text-align: center;
+}
+.thankyou h2 {
+  color: var(--brown1);
+  font-family: 'Brush Script MT', cursive;
+  font-size: 2.5rem;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="left-panel">
+    <h1>Dolly Parton Fan Club</h1>
+    <p>"Find out who you are and do it on purpose." - Dolly Parton</p>
+    <p>Join our family of fans who celebrate Dolly's music, philanthropy, and infectious spirit!</p>
+  </div>
+
+  <div class="right-panel">
+    <form id="fanForm">
+      <!-- Step 1 -->
+      <div class="step active" id="step1">
+        <h2>Join the Family</h2>
+        <label>Full Name</label>
+        <input type="text" id="fullName" required>
+        <label>Phone Number</label>
+        <input type="tel" id="phone" required>
+        <label>Email Address</label>
+        <input type="email" id="email">
+        <label>Country</label>
+        <select id="country" required>
+          <option value="">Select your country</option>
+          <option value="us">United States</option>
+          <option value="ca">Canada</option>
+          <option value="uk">United Kingdom</option>
+          <option value="au">Australia</option>
+          <option value="other">Other</option>
+        </select>
+        <label><input type="checkbox" id="terms" required> I agree to the Terms of Service</label>
+        <div class="btn-row">
+          <button type="button" class="btn" onclick="nextStep(2)">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step" id="step2">
+        <h2>Membership & Package</h2>
+        <label>Membership Type</label>
+        <select id="membership" required>
+          <option value="">Select package</option>
+          <option value="gold">Gold (VIP)</option>
+          <option value="silver">Silver</option>
+          <option value="basic">Basic</option>
+        </select>
+        <label>Claim Welcome Gift?</label>
+        <select id="gift" required>
+          <option value="">Select option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+        <div class="btn-row">
+          <button type="button" class="btn secondary" onclick="nextStep(1)">Back</button>
+          <button type="button" class="btn" onclick="nextStep(3)">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step" id="step3">
+        <h2>How Long Have You Been a Fan?</h2>
+        <label>Duration</label>
+        <select id="duration" required>
+          <option value="">Select duration</option>
+          <option value="less1">Less than a year</option>
+          <option value="1-3">1–3 years</option>
+          <option value="3-5">3–5 years</option>
+          <option value="5+">More than 5 years</option>
+        </select>
+        <div class="btn-row">
+          <button type="button" class="btn secondary" onclick="nextStep(2)">Back</button>
+          <button type="button" class="btn" onclick="submitForm()">Finish</button>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step thankyou" id="thankyou">
+        <h2>We’ll reach out to you soon ❤️</h2>
+        <p>Thank you for joining the Dolly Parton Fan Family!</p>
+        <p><strong>Reach out to +1 (619) 283‑4088</strong></p>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+function nextStep(step) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + step).classList.add('active');
+}
+function submitForm() {
+  const data = {
+    access_key: "7f2364ce-b7c2-425d-9789-12cbfb272044",
+    subject: "New Fan Club Registration",
+    from_name: "Dolly Fan Club Website",
+    fullName: document.getElementById('fullName').value,
+    phone: document.getElementById('phone').value,
+    email: document.getElementById('email').value,
+    country: document.getElementById('country').value,
+    membership: document.getElementById('membership').value,
+    gift: document.getElementById('gift').value,
+    duration: document.getElementById('duration').value
+  };
+  if (!data.fullName || !data.phone || !data.country || !data.membership || !data.gift || !data.duration || !document.getElementById('terms').checked) {
+    alert("Please fill in all required fields.");
+    return;
+  }
+  const formData = new FormData();
+  for (const key in data) { formData.append(key, data[key]); }
+  fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    body: formData
+  })
+  .then(r => r.json())
+  .then(() => {
+    nextStep('thankyou');
+  })
+  .catch(() => alert("Network error, please try again later."));
+}
+</script>
+</body>
+</html>
